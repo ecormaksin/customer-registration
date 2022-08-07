@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" >
+<head>
+  <th:block th:replace="_parts/head :: meta"/>
+  <title>Registration of customer</title>
+  <th:block th:replace="_parts/head :: css"/>
+</head>
+<body>
+
+<main>
+  <article>
+    <h1>Registration of customer</h1>
+    <form method="post" action="#"
+          th:object="${registrationForm}" th:action="@{${actionPath}}">
+
+      <ul th:if="${#fields.hasGlobalErrors()}">
+        <li th:each="err : ${#fields.globalErrors()}" th:text="${err}"></li>
+      </ul>
+
+      <label>Name</label>
+      <input type="text" th:field="*{name.value}">
+      <p th:if="${#fields.hasErrors('name.value')}">
+        <mark><span th:errors="*{name.value}"></span></mark>
+      </p>
+
+      <label>Birthdate</label>
+      <input type="date" th:field="*{birthDate.value}">
+      <p th:if="${#fields.hasErrors('birthDate.value')}">
+        <mark><span th:errors="*{birthDate.value}"></span></mark>
+      </p>
+
+      <div>
+        <button id="registerCustomerButton">Register</button>
+      </div>
+    </form>
+  </article>
+</main>
+</body>
+</html>

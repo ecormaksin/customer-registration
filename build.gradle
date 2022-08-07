@@ -8,6 +8,12 @@ group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
+sourceSets {
+    main {
+        resources.srcDirs = ["src/main/java", "src/main/resources"]
+    }
+}
+
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
@@ -19,15 +25,33 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation (
+		'org.springframework.boot:spring-boot-starter-thymeleaf',
+		'org.springframework.boot:spring-boot-starter-validation',
+		'org.springframework.boot:spring-boot-starter-web'
+	)
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation (
+		'org.springframework.boot:spring-boot-starter-test',
+		'net.sourceforge.htmlunit:htmlunit',
+		'org.seleniumhq.selenium:htmlunit-driver',
+		'org.seleniumhq.selenium:selenium-support',
+		'org.mockito:mockito-inline:4.6.1'
+	)
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+
+	// https://stackoverflow.com/questions/66586272/running-a-single-junit5-test-on-gradle-exits-with-standard-error
+	// https://github.com/junit-team/junit5/issues/1774
+	systemProperty 'java.util.logging.config.file', "${project.buildDir}/resources/test/logging-test.properties"
+
+	forkEvery = 1
+
+	testLogging {
+		showStandardStreams = true
+	}
 }

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" >
+<head>
+  <th:block th:replace="_parts/head :: meta"/>
+  <title>Registration of customer is completed.</title>
+  <th:block th:replace="_parts/head :: css"/>
+</head>
+<body>
+
+<main>
+  <article>
+    <h1>Registration of customer is completed.</h1>
+    <form id="customer" action="#" th:object="${customer}">
+
+      <label for="number">Customer Number</label>
+      <p id="number" th:text="*{number.value}" />
+
+      <label for="name">Name</label>
+      <p id="name" th:text="*{name.value}" />
+
+      <label for="birthDate">BirthDate</label>
+      <p id="birthDate" th:text="*{birthDate.value}" />
+
+    </form>
+  </article>
+</main>
+</body>
+</html>
