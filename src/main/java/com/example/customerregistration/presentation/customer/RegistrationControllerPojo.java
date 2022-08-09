@@ -31,25 +31,18 @@ public class RegistrationControllerPojo {
 
     @GetMapping
     String init(Model model) {
-        model.addAttribute("registrationForm", RegistrationForm.newForm());
-        setActionPath(model);
+        model.addAttribute("registrationForm", RegistrationForm.newForm("/" + MAPPED_URL_BASE));
         return VIEW_TEMPLATE_PATH_FORM;
-    }
-
-    private void setActionPath(Model model) {
-        model.addAttribute("actionPath", "/" + MAPPED_URL_BASE);
     }
 
     @PostMapping
     String create(Model model,
                   @Validated @ModelAttribute("registrationForm") final RegistrationForm registrationForm,
                   BindingResult bindingResult,
-                  @ModelAttribute("pathPart") final String pathPart,
                   RedirectAttributes attributes,
                   UriComponentsBuilder builder) {
 
         if (bindingResult.hasErrors()) {
-            setActionPath(model);
             return VIEW_TEMPLATE_PATH_FORM;
         }
 
@@ -62,11 +55,12 @@ public class RegistrationControllerPojo {
                 RegistrationRequestDate.now()
             );
         } catch (AgeUnderLimitException e) {
-            FieldError error = new FieldError(bindingResult.getObjectName(),"birthDate.value", e.getMessage());
+            FieldError error = new FieldError(bindingResult.getObjectName(),
+                "birthDate.value",
+                registrationForm.birthDate().value(),
+                true, null, null, e.getMessage());
             bindingResult.addError(error);
 
-            model.addAttribute("registrationForm", registrationForm);
-            setActionPath(model);
             return VIEW_TEMPLATE_PATH_FORM;
         }
 
@@ -84,7 +78,7 @@ public class RegistrationControllerPojo {
 
         model.addAttribute("customer", customer);
 
-        return "customer/register/completed";
+        return VIEW_TEMPLATE_PATH_COMPLETED;
     }
 
     @InitBinder

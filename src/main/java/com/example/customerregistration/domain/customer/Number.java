@@ -24,7 +24,7 @@ public class Number {
 
     private static String newValue() {
         UUID uuid = UUID.randomUUID();
-        return uuid.toString();
+        return uuid.toString().replace("-", "");
     }
 
     public static Number newInstanceByStaticMethod() {

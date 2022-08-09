@@ -11,7 +11,7 @@
   <article>
     <h1>Registration of customer</h1>
     <form method="post" action="#"
-          th:object="${registrationForm}" th:action="@{${actionPath}}">
+          th:object="${registrationForm}" th:action="@{${registrationForm.actionPath}}">
 
       <ul th:if="${#fields.hasGlobalErrors()}">
         <li th:each="err : ${#fields.globalErrors()}" th:text="${err}"></li>

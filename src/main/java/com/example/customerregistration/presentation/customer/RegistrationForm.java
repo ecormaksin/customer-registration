@@ -11,14 +11,17 @@ import javax.validation.Valid;
 @Getter
 public class RegistrationForm{
 
+    String actionPath;
+
     @Valid Name name;
     @Valid BirthDate birthDate;
 
     @Deprecated
     RegistrationForm() {}
 
-    public static RegistrationForm newForm() {
+    public static RegistrationForm newForm(String actionPath) {
         return new RegistrationForm(
+            actionPath,
             Name.blank(),
             BirthDate.initialValue()
         );
