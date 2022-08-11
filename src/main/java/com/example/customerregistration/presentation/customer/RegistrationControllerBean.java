@@ -1,7 +1,8 @@
 package com.example.customerregistration.presentation.customer;
 
-import com.example.customerregistration.domain.customer.*;
+import com.example.customerregistration.domain.customer.Customer;
 import com.example.customerregistration.domain.customer.Number;
+import com.example.customerregistration.domain.customer.RegistrationRequestDate;
 import com.example.customerregistration.usecase.scenario.CustomerRegistrationScenario;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,13 +14,21 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @Controller
-@RequestMapping(RegistrationControllerPojo.MAPPED_URL_BASE)
-public class RegistrationControllerPojo extends RegistrationControllerBase {
+@RequestMapping(RegistrationControllerBean.MAPPED_URL_BASE)
+public class RegistrationControllerBean extends RegistrationControllerBase {
 
-    static final String MAPPED_URL_BASE = "customer/pojo/register";
+    static final String MAPPED_URL_BASE = "customer/bean/register";
 
-    public RegistrationControllerPojo(final CustomerRegistrationScenario registrationScenario) {
+    final Number number;
+    final RegistrationRequestDate registrationRequestDate;
+
+    public RegistrationControllerBean(final CustomerRegistrationScenario registrationScenario,
+                                      final Number number,
+                                      final RegistrationRequestDate registrationRequestDate) {
         super(registrationScenario);
+
+        this.number = number;
+        this.registrationRequestDate = registrationRequestDate;
     }
 
     String mappedUrlBase() {
@@ -27,11 +36,11 @@ public class RegistrationControllerPojo extends RegistrationControllerBase {
     }
 
     Number customerNumber() {
-        return Number.newInstanceByStaticMethod();
+        return number.newInstanceByInstanceMethod();
     }
 
     RegistrationRequestDate registrationRequestDate() {
-        return RegistrationRequestDate.nowByStaticMethod();
+        return registrationRequestDate.nowByInstanceMethod();
     }
 
     @GetMapping

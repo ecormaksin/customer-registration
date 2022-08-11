@@ -2,6 +2,7 @@ package com.example.customerregistration.domain.customer;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -9,6 +10,7 @@ import java.util.UUID;
 
 @AllArgsConstructor
 @Getter
+@Component
 public class Number {
 
     static final int SIZE = 32;
