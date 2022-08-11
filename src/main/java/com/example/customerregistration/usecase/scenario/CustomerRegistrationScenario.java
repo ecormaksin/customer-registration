@@ -10,9 +10,9 @@ public class CustomerRegistrationScenario {
     public Customer execute(RegistrationRequest registrationRequest) {
         // do nothing for the simplicity of this example project.
         return new Customer(
-            registrationRequest.number(),
-            registrationRequest.name(),
-            registrationRequest.birthDate()
+            registrationRequest.customerNumber(),
+            registrationRequest.customerName(),
+            registrationRequest.birthdate()
         );
     }
 }

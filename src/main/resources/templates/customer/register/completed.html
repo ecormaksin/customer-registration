@@ -12,14 +12,14 @@
     <h1>Registration of customer is completed.</h1>
     <form id="customer" action="#" th:object="${customer}">
 
-      <label for="number">Customer Number</label>
-      <p id="number" th:text="*{number.value}" />
+      <label for="customerNumber">Customer Number</label>
+      <p id="customerNumber" th:text="*{customerNumber.value}" />
 
-      <label for="name">Name</label>
-      <p id="name" th:text="*{name.value}" />
+      <label for="customerName">Name</label>
+      <p id="customerName" th:text="*{customerName.value}" />
 
-      <label for="birthDate">BirthDate</label>
-      <p id="birthDate" th:text="*{birthDate.value}" />
+      <label for="birthdate">BirthDate</label>
+      <p id="birthdate" th:text="*{birthdate.value}" />
 
     </form>
   </article>

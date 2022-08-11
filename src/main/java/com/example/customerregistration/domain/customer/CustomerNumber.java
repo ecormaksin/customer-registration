@@ -11,9 +11,9 @@ import java.util.UUID;
 @AllArgsConstructor
 @Getter
 @Component
-public class Number {
+public class CustomerNumber {
 
-    static final int SIZE = 32;
+    public static final int SIZE = 32;
     static final String REGEXP = "[\\da-z]{" + SIZE + "}";
     static final String VALIDATION_MESSAGE = "CustomerNumber must be " + SIZE + " length with alpha-numeric value.";
 
@@ -22,22 +22,22 @@ public class Number {
     String value;
 
     @Deprecated
-    Number() {}
+    CustomerNumber() {}
 
     private static String newValue() {
         UUID uuid = UUID.randomUUID();
         return uuid.toString().replace("-", "");
     }
 
-    public static Number newInstanceByStaticMethod() {
-        return new Number(newValue());
+    public static CustomerNumber newInstanceByStaticMethod() {
+        return new CustomerNumber(newValue());
     }
 
     /**
      * this method is meaningless, of course
      * @return
      */
-    public Number newInstanceByInstanceMethod() {
-        return new Number(newValue());
+    public CustomerNumber newInstanceByInstanceMethod() {
+        return new CustomerNumber(newValue());
     }
 }

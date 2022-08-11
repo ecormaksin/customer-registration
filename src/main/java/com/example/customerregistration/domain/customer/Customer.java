@@ -8,9 +8,9 @@ import javax.validation.Valid;
 @AllArgsConstructor
 @Getter
 public class Customer {
-    @Valid Number number;
-    @Valid Name name;
-    @Valid BirthDate birthDate;
+    @Valid CustomerNumber customerNumber;
+    @Valid CustomerName customerName;
+    @Valid Birthdate birthdate;
 
     @Deprecated
     Customer() {}

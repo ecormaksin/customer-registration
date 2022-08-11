@@ -8,16 +8,16 @@ import javax.validation.constraints.Size;
 
 @AllArgsConstructor
 @Getter
-public class Name{
+public class CustomerName {
 
     @NotBlank
     @Size(min = 5, max = 10)
     String value;
 
     @Deprecated
-    Name() {}
+    CustomerName() {}
 
-    public static Name blank() {
-        return new Name("");
+    public static CustomerName blank() {
+        return new CustomerName("");
     }
 }

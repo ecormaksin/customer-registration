@@ -11,26 +11,26 @@
   <article>
     <h1>Registration of customer</h1>
     <form method="post" action="#"
-          th:object="${registrationForm}" th:action="@{${registrationForm.actionPath}}">
+          th:object="${form}" th:action="@{${form.actionPath}}">
 
       <ul th:if="${#fields.hasGlobalErrors()}">
         <li th:each="err : ${#fields.globalErrors()}" th:text="${err}"></li>
       </ul>
 
       <label>Name</label>
-      <input type="text" th:field="*{name.value}">
-      <p th:if="${#fields.hasErrors('name.value')}">
-        <mark><span th:errors="*{name.value}"></span></mark>
+      <input id="customerName" type="text" th:field="*{customerName.value}">
+      <p th:if="${#fields.hasErrors('customerName.value')}">
+        <mark><span id="customerNameError" th:errors="*{customerName.value}"></span></mark>
       </p>
 
       <label>Birthdate</label>
-      <input type="date" th:field="*{birthDate.value}">
-      <p th:if="${#fields.hasErrors('birthDate.value')}">
-        <mark><span th:errors="*{birthDate.value}"></span></mark>
+      <input id="birthdate" type="date" th:field="*{birthdate.value}">
+      <p th:if="${#fields.hasErrors('birthdate.value')}">
+        <mark><span id="birthdateError" th:errors="*{birthdate.value}"></span></mark>
       </p>
 
       <div>
-        <button id="registerCustomerButton">Register</button>
+        <button id="registerButton">Register</button>
       </div>
     </form>
   </article>

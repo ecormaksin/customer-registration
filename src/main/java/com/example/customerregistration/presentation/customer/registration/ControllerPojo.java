@@ -1,8 +1,7 @@
-package com.example.customerregistration.presentation.customer;
+package com.example.customerregistration.presentation.customer.registration;
 
-import com.example.customerregistration.domain.customer.Customer;
-import com.example.customerregistration.domain.customer.Number;
-import com.example.customerregistration.domain.customer.RegistrationRequestDate;
+import com.example.customerregistration.domain.customer.*;
+import com.example.customerregistration.domain.customer.CustomerNumber;
 import com.example.customerregistration.usecase.scenario.CustomerRegistrationScenario;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,33 +13,25 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @Controller
-@RequestMapping(RegistrationControllerBean.MAPPED_URL_BASE)
-public class RegistrationControllerBean extends RegistrationControllerBase {
+@RequestMapping(ControllerPojo.MAPPED_URL_BASE)
+public class ControllerPojo extends ControllerBase {
 
-    static final String MAPPED_URL_BASE = "customer/bean/register";
+    static final String MAPPED_URL_BASE = "customer/pojo/register";
 
-    final Number number;
-    final RegistrationRequestDate registrationRequestDate;
-
-    public RegistrationControllerBean(final CustomerRegistrationScenario registrationScenario,
-                                      final Number number,
-                                      final RegistrationRequestDate registrationRequestDate) {
+    public ControllerPojo(final CustomerRegistrationScenario registrationScenario) {
         super(registrationScenario);
-
-        this.number = number;
-        this.registrationRequestDate = registrationRequestDate;
     }
 
     String mappedUrlBase() {
         return MAPPED_URL_BASE;
     }
 
-    Number customerNumber() {
-        return number.newInstanceByInstanceMethod();
+    CustomerNumber customerNumber() {
+        return CustomerNumber.newInstanceByStaticMethod();
     }
 
     RegistrationRequestDate registrationRequestDate() {
-        return registrationRequestDate.nowByInstanceMethod();
+        return RegistrationRequestDate.nowByStaticMethod();
     }
 
     @GetMapping
@@ -49,12 +40,12 @@ public class RegistrationControllerBean extends RegistrationControllerBase {
     }
 
     @PostMapping
-    String create(@Validated @ModelAttribute("registrationForm") final RegistrationForm registrationForm,
+    String create(@Validated @ModelAttribute("form") final Form form,
                   BindingResult bindingResult,
                   RedirectAttributes attributes,
                   UriComponentsBuilder builder) {
 
-        return super.create(registrationForm, bindingResult, attributes, builder);
+        return super.create(form, bindingResult, attributes, builder);
     }
 
     @GetMapping("completed")

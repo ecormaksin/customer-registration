@@ -7,23 +7,23 @@ import javax.validation.Valid;
 @Getter
 public class RegistrationRequest {
 
-    @Valid Number number;
-    @Valid Name name;
-    @Valid BirthDate birthDate;
+    @Valid CustomerNumber customerNumber;
+    @Valid CustomerName customerName;
+    @Valid Birthdate birthdate;
     @Valid RegistrationRequestDate registrationRequestDate;
 
     public RegistrationRequest(
-                Number number,
-                Name name,
-                BirthDate birthDate,
+                CustomerNumber customerNumber,
+                CustomerName customerName,
+                Birthdate birthdate,
                 RegistrationRequestDate registrationRequestDate) throws AgeUnderLimitException {
 
-        this.number = number;
-        this.name = name;
-        this.birthDate = birthDate;
+        this.customerNumber = customerNumber;
+        this.customerName = customerName;
+        this.birthdate = birthdate;
         this.registrationRequestDate = registrationRequestDate;
 
-        if (birthDate.isNotMatchedAgeLimitAt(registrationRequestDate)) {
+        if (birthdate.isNotMatchedAgeLimitAt(registrationRequestDate)) {
             throw new AgeUnderLimitException();
         }
     }
