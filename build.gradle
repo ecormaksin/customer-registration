@@ -45,6 +45,7 @@ dependencies {
 
 tasks.named('test') {
     jvmArgs = ["-javaagent:testlibs/jmockit-1.49.jar"]
+
 	useJUnitPlatform()
 
 	// https://stackoverflow.com/questions/66586272/running-a-single-junit5-test-on-gradle-exits-with-standard-error
