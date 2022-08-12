@@ -1,6 +1,6 @@
-# Customer Registration Example Project
+# Customer Registration Sample Project
 
-This is a very simple Spring Boot example application project.
+This is a very simple Spring Boot sample application project.
 
 The purpose of this application is that I learn how to mock static methods in the context of Spring Boot test using [MockMvc and WebDriver](https://docs.spring.io/spring-framework/docs/current/reference/html/testing.html#spring-mvc-test-server-htmlunit-webdriver).
 
