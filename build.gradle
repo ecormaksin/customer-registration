@@ -50,7 +50,7 @@ tasks.named('test') {
 
 	// https://stackoverflow.com/questions/66586272/running-a-single-junit5-test-on-gradle-exits-with-standard-error
 	// https://github.com/junit-team/junit5/issues/1774
-	systemProperty 'java.util.logging.config.file', "${project.buildDir}/resources/test/logging-test.properties"
+	systemProperty 'java.util.logging.config.file', "src/test/resources/logging-test.properties"
 
 	forkEvery = 1
 
