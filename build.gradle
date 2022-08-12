@@ -38,11 +38,13 @@ dependencies {
 		'net.sourceforge.htmlunit:htmlunit',
 		'org.seleniumhq.selenium:htmlunit-driver',
 		'org.seleniumhq.selenium:selenium-support',
-		'org.mockito:mockito-inline:4.6.1'
+		'org.mockito:mockito-inline:4.6.1',
+        'org.jmockit:jmockit:1.49'
 	)
 }
 
 tasks.named('test') {
+    jvmArgs = ["-javaagent:testlibs/jmockit-1.49.jar"]
 	useJUnitPlatform()
 
 	// https://stackoverflow.com/questions/66586272/running-a-single-junit5-test-on-gradle-exits-with-standard-error

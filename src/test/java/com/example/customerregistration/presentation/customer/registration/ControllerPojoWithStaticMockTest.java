@@ -39,7 +39,7 @@ public class ControllerPojoWithStaticMockTest {
 
         final CustomerNumber customerNumberMocked = CustomerNumberTestHelper.fromInt(1);
         final String customerNumberValue = customerNumberMocked.value();
-        final RegistrationRequestDate registrationRequestDateMocked = new RegistrationRequestDate(LocalDate.of(2040, 8, 11));
+        final RegistrationRequestDate registrationRequestDateMocked = new RegistrationRequestDate(LocalDate.of(2000, 1, 1));
 
         try (MockedStatic<CustomerNumber> numberMockedStatic = Mockito.mockStatic(CustomerNumber.class);
              MockedStatic<RegistrationRequestDate> requestDateMockedStatic = Mockito.mockStatic(RegistrationRequestDate.class);) {
@@ -50,13 +50,13 @@ public class ControllerPojoWithStaticMockTest {
             FormPagePojo formPage = FormPagePojo.to(driver);
 
             final String customerName = "John Doe";
-            final String birthdate = "2022-08-11";
+            final String birthdate = "1982-01-01";
 
             CompletedPagePojo completedPage =
                 formPage.register(CompletedPagePojo.class, customerName, birthdate);
 
-            assertEquals(customerNumberValue, completedPage.number());
-            assertEquals(customerName, completedPage.name());
+            assertEquals(customerNumberValue, completedPage.customerNumber());
+            assertEquals(customerName, completedPage.customerName());
             assertEquals(birthdate, completedPage.birthdate());
         }
     }
@@ -64,7 +64,7 @@ public class ControllerPojoWithStaticMockTest {
     @Test
     void test_WhenBirthdateIsUnderTheLimit_ThenValidationFails() {
 
-        final RegistrationRequestDate registrationRequestDateMocked = new RegistrationRequestDate(LocalDate.of(2021, 8, 11));
+        final RegistrationRequestDate registrationRequestDateMocked = new RegistrationRequestDate(LocalDate.of(2000, 1, 1));
 
         try(MockedStatic<RegistrationRequestDate> requestDateMockedStatic = Mockito.mockStatic(RegistrationRequestDate.class);) {
 
@@ -75,7 +75,7 @@ public class ControllerPojoWithStaticMockTest {
             final String birthdate = BirthdateTestHelper.valueUnderTheAgeLimit();
 
             FormPagePojo returnedFormPage =
-                formPage.register(FormPagePojo.class, "Joe Bloggs", "2004-08-11");
+                formPage.register(FormPagePojo.class, "Joe Bloggs", "1983-01-01");
 
             assertEquals("The age must be 18 or over", returnedFormPage.birthdateErrorMessage());
         }

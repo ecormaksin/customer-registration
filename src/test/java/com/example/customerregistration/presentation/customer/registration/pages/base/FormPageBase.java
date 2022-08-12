@@ -4,17 +4,11 @@ import com.example.customerregistration.presentation.CustomPageObject;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public abstract class FormPageBase extends CustomPageObject {
 
-    @FindBy(id = "customerName")
-    protected WebElement name;
+    protected WebElement customerName;
 
     protected WebElement birthdate;
 
@@ -34,8 +28,8 @@ public abstract class FormPageBase extends CustomPageObject {
     protected abstract String urlRelativePath();
 
     public FormPageBase inputName(final String name) {
-        this.name.clear();
-        this.name.sendKeys(name);
+        this.customerName.clear();
+        this.customerName.sendKeys(name);
         return this;
     }
 

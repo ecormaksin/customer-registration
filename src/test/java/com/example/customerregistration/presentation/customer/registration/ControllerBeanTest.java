@@ -47,34 +47,34 @@ public class ControllerBeanTest {
         doReturn(customerNumberMocked).when(customerNumber)
             .newInstanceByInstanceMethod();
 
-        final RegistrationRequestDate registrationRequestDateMocked = new RegistrationRequestDate(LocalDate.of(2040, 8, 11));
+        final RegistrationRequestDate registrationRequestDateMocked = new RegistrationRequestDate(LocalDate.of(2000, 1, 1));
         doReturn(registrationRequestDateMocked).when(registrationRequestDate)
             .nowByInstanceMethod();
 
         FormPageBean formPage = FormPageBean.to(driver);
 
         final String customerName = "John Doe";
-        final String birthdate = "2022-08-11";
+        final String birthdate = "1982-01-01";
 
         CompletedPageBean completedPage =
             formPage.register(CompletedPageBean.class, customerName, birthdate);
 
-        assertEquals(customerNumberValue, completedPage.number());
-        assertEquals(customerName, completedPage.name());
+        assertEquals(customerNumberValue, completedPage.customerNumber());
+        assertEquals(customerName, completedPage.customerName());
         assertEquals(birthdate, completedPage.birthdate());
     }
 
     @Test
     void test_WhenBirthdateIsUnderTheLimit_ThenValidationFails() {
 
-        final RegistrationRequestDate registrationRequestDateMock = new RegistrationRequestDate(LocalDate.of(2021, 8, 11));
+        final RegistrationRequestDate registrationRequestDateMock = new RegistrationRequestDate(LocalDate.of(2000, 1, 1));
         doReturn(registrationRequestDateMock).when(registrationRequestDate)
             .nowByInstanceMethod();
 
         FormPageBean formPage = FormPageBean.to(driver);
 
         FormPageBean returnedFormPage =
-            formPage.register(FormPageBean.class, "Joe Bloggs", "2004-08-11");
+            formPage.register(FormPageBean.class, "Joe Bloggs", "1983-01-01");
 
         assertEquals("The age must be 18 or over", returnedFormPage.birthdateErrorMessage());
     }

@@ -1,6 +1,6 @@
 package com.example.customerregistration.presentation.customer.registration;
 
-import com.example.customerregistration.domain.customer.BirthdateTestHelper;
+import com.example.customerregistration.domain.customer.*;
 import com.example.customerregistration.presentation.customer.registration.pages.pojo.CompletedPagePojo;
 import com.example.customerregistration.presentation.customer.registration.pages.pojo.FormPagePojo;
 import com.example.customerregistration.usecase.scenario.CustomerRegistrationScenario;
@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ControllerPojoTest {
+public class ControllerPojoWithJMockitTest {
 
     @Autowired
     MockMvc mockMvc;
@@ -30,14 +30,19 @@ public class ControllerPojoTest {
     @Test
     void test_WhenNameAndBirthdateIsInputAppropriately_ThenRegistrationSucceeds() throws Exception {
 
+        new FakeCustomerNumber_1();
+        new FakeRegistrationRequestDate_20000101();
+
         FormPagePojo formPage = FormPagePojo.to(driver);
 
         final String customerName = "John Doe";
-        final String birthdate = BirthdateTestHelper.valueOverTheAgeLimit();
+        final String birthdate = "1982-01-01";
 
         CompletedPagePojo completedPage =
             formPage.register(CompletedPagePojo.class, customerName, birthdate);
 
+        final CustomerNumber customerNumberMocked = CustomerNumberTestHelper.fromInt(1);
+        assertEquals(customerNumberMocked.value(), completedPage.customerNumber());
         assertEquals(customerName, completedPage.customerName());
         assertEquals(birthdate, completedPage.birthdate());
     }
@@ -45,12 +50,12 @@ public class ControllerPojoTest {
     @Test
     void test_WhenBirthdateIsUnderTheLimit_ThenValidationFails() {
 
+        new FakeRegistrationRequestDate_20000101();
+
         FormPagePojo formPage = FormPagePojo.to(driver);
 
-        final String birthdate = BirthdateTestHelper.valueUnderTheAgeLimit();
-
         FormPagePojo returnedFormPage =
-            formPage.register(FormPagePojo.class, "Joe Bloggs", birthdate);
+            formPage.register(FormPagePojo.class, "Joe Bloggs", "1983-01-01");
 
         assertEquals("The age must be 18 or over", returnedFormPage.birthdateErrorMessage());
     }

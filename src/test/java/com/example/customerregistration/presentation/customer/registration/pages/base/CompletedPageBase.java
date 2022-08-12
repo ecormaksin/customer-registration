@@ -3,16 +3,12 @@ package com.example.customerregistration.presentation.customer.registration.page
 import com.example.customerregistration.presentation.CustomPageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public abstract class CompletedPageBase extends CustomPageObject {
 
-    @FindBy(id = "customerNumber")
-    protected WebElement number;
+    protected WebElement customerNumber;
 
-    @FindBy(id = "customerName")
-    protected WebElement name;
+    protected WebElement customerName;
 
     protected WebElement birthdate;
 
@@ -27,12 +23,12 @@ public abstract class CompletedPageBase extends CustomPageObject {
 
     protected abstract String urlRelativePath();
 
-    public String number() {
-        return this.number.getText();
+    public String customerNumber() {
+        return this.customerNumber.getText();
     }
 
-    public String name() {
-        return this.name.getText();
+    public String customerName() {
+        return this.customerName.getText();
     }
 
     public String birthdate() {
