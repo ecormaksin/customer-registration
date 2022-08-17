@@ -2,7 +2,7 @@
 
 This is a very simple Spring Boot sample application project.
 
-The purpose of this application is that I learn how to mock static methods in the context of Spring Boot test using [MockMvc and WebDriver](https://docs.spring.io/spring-framework/docs/current/reference/html/testing.html#spring-mvc-test-server-htmlunit-webdriver).
+The purpose of this application is to demonstrate how to mock static methods in the context of Spring Boot test using [MockMvc and WebDriver](https://docs.spring.io/spring-framework/docs/current/reference/html/testing.html#spring-mvc-test-server-htmlunit-webdriver).
 
 For the simplicity, this application does not have persistence layer.
 
