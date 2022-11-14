@@ -8,6 +8,7 @@ import com.example.customerregistration.presentation.customer.registration.pages
 import com.example.customerregistration.presentation.customer.registration.pages.pojo.FormPagePojo;
 import com.example.customerregistration.usecase.scenario.CustomerRegistrationScenario;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
@@ -35,6 +36,7 @@ public class ControllerPojoWithStaticMockTest {
     CustomerRegistrationScenario registrationScenario;
 
     @Test
+    @Disabled
     void test_WhenNameAndBirthdateIsInputAppropriately_ThenRegistrationSucceeds() throws Exception {
 
         final CustomerNumber customerNumberMocked = CustomerNumberTestHelper.fromInt(1);
@@ -62,6 +64,7 @@ public class ControllerPojoWithStaticMockTest {
     }
 
     @Test
+    @Disabled
     void test_WhenBirthdateIsUnderTheLimit_ThenValidationFails() {
 
         final RegistrationRequestDate registrationRequestDateMocked = new RegistrationRequestDate(LocalDate.of(2000, 1, 1));
